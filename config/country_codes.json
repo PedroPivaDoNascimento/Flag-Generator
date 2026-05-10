@@ -1,0 +1,14 @@
+{
+  "special_codes": {
+    "inglaterra": "gb-eng",
+    "england": "gb-eng", 
+    "escócia": "gb-sct",
+    "scotland": "gb-sct",
+    "país de gales": "gb-wls",
+    "wales": "gb-wls",
+    "reino unido": "gb",
+    "united kingdom": "gb"
+  },
+  "fallback_default": true,
+  "api_base_url": "https://flagcdn.com/w2560"
+}
