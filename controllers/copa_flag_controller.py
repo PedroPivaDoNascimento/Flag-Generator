@@ -1,13 +1,16 @@
 from fpdf import FPDF
 from pathlib import Path
-from typing import Union, Optional, Dict, Any
+from typing import Union, Optional, Dict, Any, List, Tuple
+from PIL import Image
 import logging
 
 from models.country import Country
 from models.flag_service import FlagService, FlagServiceError
 from views.pdf_generator import PDFGenerator, PDFGenerationError
+from views.a4_sheet_generator import A4SheetGenerator, A4SheetGenerationError
 
 logger = logging.getLogger(__name__)
+
 
 class CopaFlagController:
     """
@@ -30,6 +33,7 @@ class CopaFlagController:
         
         self._flag_service: Optional[FlagService] = None
         self._pdf_generator: Optional[PDFGenerator] = None
+        self._a4_generator: Optional[A4SheetGenerator] = None
     
     def _initialize_components(self) -> None:
         """Inicializa dependências do Model e View."""
@@ -39,6 +43,7 @@ class CopaFlagController:
             config_path=self.config_path
         )
         self._pdf_generator = PDFGenerator(output_dir=self.output_dir)
+        self._a4_generator = A4SheetGenerator(output_dir=self.output_dir)
     
     def _create_pdf_instance(self) -> FPDF:
         """Factory method para instância padronizada de PDF."""
@@ -47,13 +52,19 @@ class CopaFlagController:
     def process_all(self) -> Dict[str, Any]:
         """
         Método principal: executa todo o fluxo de processamento.
+        Gera:
+        1. PDF de bandeiras coloridas individuais (uma por página)
+        2. PDF de bandeiras para colorir (uma por página)
+        3. Folhas A4 com grid de 12 bandeiras coloridas cada
+        
         Retorna dicionário com estatísticas para logging/relatório.
         """
         stats = {
             'total': 0,
             'processed': 0,
             'failed': 0,
-            'errors': []
+            'errors': [],
+            'sheets_created': 0
         }
         
         try:
@@ -72,6 +83,9 @@ class CopaFlagController:
             pdf_color = self._create_pdf_instance()
             pdf_outline = self._create_pdf_instance()
             
+            # Coleta de dados para folhas A4
+            a4_flags_data: List[Tuple[Image.Image, str]] = []
+            
             logger.info(f"Iniciando processamento de {stats['total']} países...")
             
             # 4. Loop principal de processamento
@@ -84,9 +98,12 @@ class CopaFlagController:
                         stats['errors'].append(f"Fetch falhou: {country.code}")
                         continue
                     
-                    # View: Adicionar aos PDFs
+                    # View: Adicionar aos PDFs individuais
                     self._pdf_generator.add_color_page(pdf_color, flag_image, index)
                     self._pdf_generator.add_outline_page(pdf_outline, flag_image, index)
+                    
+                    # Coletar dados para folhas A4
+                    a4_flags_data.append((flag_image, country.name))
                     
                     stats['processed'] += 1
                     logger.info(f"✓ ({stats['processed']}/{stats['total']}): {country.code.upper()}")
@@ -97,21 +114,38 @@ class CopaFlagController:
                     stats['errors'].append(error_msg)
                     logger.error(error_msg, exc_info=True)
             
-            # 5. View: Finalizar e exportar
+            # 5. View: Finalizar e exportar PDFs individuais
             color_path = self._pdf_generator.save_pdf(pdf_color, "bandeiras_coloridas.pdf")
             outline_path = self._pdf_generator.save_pdf(pdf_outline, "bandeiras_para_colorir.pdf")
             
-            # 6. Tentar download automático (Colab)
+            # 6. Gerar folhas A4 com grid de bandeiras
+            if a4_flags_data:
+                sheets = self._a4_generator.create_sheets_from_flags(a4_flags_data)
+                
+                # Salvar cada folha
+                for idx, sheet in enumerate(sheets, start=1):
+                    sheet_filename = f"folha_a4_bandeiras_{idx}.pdf"
+                    sheet_path = self._a4_generator.save_pdf(sheet, sheet_filename)
+                    stats['sheets_created'] += 1
+                    logger.info(f"Folha A4 #{idx} salva: {sheet_path}")
+                
+                # Download da primeira folha no Colab
+                if sheets:
+                    first_sheet_path = self.output_dir / "folha_a4_bandeiras_1.pdf"
+                    self._a4_generator.download_file_colab(first_sheet_path)
+            
+            # 7. Tentar download automático (Colab)
             self._pdf_generator.download_file_colab(color_path)
             self._pdf_generator.download_file_colab(outline_path)
             
             logger.info(f"✅ Sucesso! {stats['processed']} páginas geradas.")
+            logger.info(f"📄 {stats['sheets_created']} folhas A4 criadas.")
             
         except FlagServiceError as e:
             error_msg = f"[MODEL] {e}"
             logger.error(error_msg)
             stats['errors'].append(error_msg)
-        except PDFGenerationError as e:
+        except (PDFGenerationError, A4SheetGenerationError) as e:
             error_msg = f"[VIEW] {e}"
             logger.error(error_msg)
             stats['errors'].append(error_msg)
