@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandeiras dos Países</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        /* ARQUIVO 1 - Grade 3x4 */
+        .page-grid {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 5mm;
+            padding: 10mm;
+        }
+
+        .flag-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            border: 1px solid #ddd;
+            padding: 3mm;
+            background: white;
+        }
+
+        .flag-cell img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/2;
+            object-fit: cover;
+            margin-bottom: 2mm;
+        }
+
+        .flag-cell span {
+            font-size: 9pt;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.1;
+        }
+
+        /* ARQUIVO 2 - Página inteira */
+        .page-full {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20mm;
+        }
+
+        .flag-full-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .flag-full-container img {
+            width: 180mm;
+            height: auto;
+            aspect-ratio: 3/2;
+            object-fit: cover;
+            margin-bottom: 5mm;
+            filter: grayscale(100%) brightness(0.9);
+        }
+
+        .flag-full-container span {
+            font-size: 18pt;
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page-grid, .page-full {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ARQUIVO 1: Bandeiras Coloridas em Grade 3x4 -->
+    <div class="page-grid">
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/br.png" alt="Bandeira do Brasil">
+            <span>Brasil</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/us.png" alt="Bandeira dos Estados Unidos">
+            <span>Estados Unidos</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/fr.png" alt="Bandeira da França">
+            <span>França</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/de.png" alt="Bandeira da Alemanha">
+            <span>Alemanha</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/it.png" alt="Bandeira da Itália">
+            <span>Itália</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/es.png" alt="Bandeira da Espanha">
+            <span>Espanha</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/gb.png" alt="Bandeira do Reino Unido">
+            <span>Reino Unido</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/jp.png" alt="Bandeira do Japão">
+            <span>Japão</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/cn.png" alt="Bandeira da China">
+            <span>China</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/in.png" alt="Bandeira da Índia">
+            <span>Índia</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/ru.png" alt="Bandeira da Rússia">
+            <span>Rússia</span>
+        </div>
+        <div class="flag-cell">
+            <img src="https://flagcdn.com/w320/ca.png" alt="Bandeira do Canadá">
+            <span>Canadá</span>
+        </div>
+    </div>
+
+    <!-- ARQUIVO 2: Bandeiras para Colorir (Página Inteira) -->
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/br.png" alt="Bandeira do Brasil para colorir">
+            <span>Brasil</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/us.png" alt="Bandeira dos Estados Unidos para colorir">
+            <span>Estados Unidos</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/fr.png" alt="Bandeira da França para colorir">
+            <span>França</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/de.png" alt="Bandeira da Alemanha para colorir">
+            <span>Alemanha</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/it.png" alt="Bandeira da Itália para colorir">
+            <span>Itália</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/es.png" alt="Bandeira da Espanha para colorir">
+            <span>Espanha</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/gb.png" alt="Bandeira do Reino Unido para colorir">
+            <span>Reino Unido</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/jp.png" alt="Bandeira do Japão para colorir">
+            <span>Japão</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/cn.png" alt="Bandeira da China para colorir">
+            <span>China</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/in.png" alt="Bandeira da Índia para colorir">
+            <span>Índia</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/ru.png" alt="Bandeira da Rússia para colorir">
+            <span>Rússia</span>
+        </div>
+    </div>
+
+    <div class="page-full">
+        <div class="flag-full-container">
+            <img src="https://flagcdn.com/w640/ca.png" alt="Bandeira do Canadá para colorir">
+            <span>Canadá</span>
+        </div>
+    </div>
+</body>
+</html>
