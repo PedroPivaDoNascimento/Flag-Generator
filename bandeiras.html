@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bandeiras dos Países</title>
+    <title>Bandeiras dos Países - Copa 2026</title>
     <style>
         * {
             margin: 0;
@@ -13,294 +13,275 @@
 
         @page {
             size: A4;
-            margin: 10mm;
+            margin: 0; /* Controle total do espaço pelo CSS */
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: white;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        /* ARQUIVO 1 - Grade 3x4 */
+        /* Cada bloco representa uma folha A4 em formato de Grade 3x4 */
         .page-grid {
             width: 210mm;
             height: 297mm;
-            page-break-after: always;
+            page-break-after: always; 
+            break-after: page; /* Garante a quebra de página perfeita no PDF */
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 5mm;
-            padding: 10mm;
+            grid-template-columns: repeat(3, 1fr); /* 3 Colunas Gigantes */
+            grid-template-rows: repeat(4, 1fr);    /* 4 Linhas Bem Distribuídas */
+            gap: 6mm;
+            padding: 8mm;
+            background: white;
         }
 
         .flag-cell {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            page-break-inside: avoid;
-            break-inside: avoid;
-            border: 1px solid #ddd;
-            padding: 3mm;
+            align-items: center;      
+            justify-content: center; /* Centralização absoluta */
+            border: 2.5px solid #000000; /* Borda forte e visível para recorte */
+            padding: 4mm;
             background: white;
+            text-align: center;
         }
 
         .flag-cell img {
-            width: 100%;
+            width: 100%; /* Força a bandeira a abrir no limite máximo da coluna */
             height: auto;
             aspect-ratio: 3/2;
             object-fit: cover;
-            margin-bottom: 2mm;
+            margin-bottom: 4mm; /* Espaço ideal para a legenda */
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
         }
 
         .flag-cell span {
-            font-size: 9pt;
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-            line-height: 1.1;
-        }
-
-        /* ARQUIVO 2 - Página inteira */
-        .page-full {
-            width: 210mm;
-            height: 297mm;
-            page-break-after: always;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20mm;
-        }
-
-        .flag-full-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-
-        .flag-full-container img {
-            width: 180mm;
-            height: auto;
-            aspect-ratio: 3/2;
-            object-fit: cover;
-            margin-bottom: 5mm;
-            filter: grayscale(100%) brightness(0.9);
-        }
-
-        .flag-full-container span {
-            font-size: 18pt;
-            text-align: center;
+            font-size: 18pt; /* Letras grandes e muito visíveis */
             font-weight: bold;
             color: #000;
+            line-height: 1.1;
+            display: block;
         }
 
         @media print {
             body {
                 background: white;
             }
-            .page-grid, .page-full {
+            .page-grid {
                 margin: 0;
+                border: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ARQUIVO 1: Bandeiras Coloridas em Grade 3x4 -->
+
+    <!-- PÁGINA 1 -->
     <div class="page-grid">
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/br.png" alt="Bandeira do Brasil">
+            <img src="https://flagcdn.com/w640/br.png" alt="Bandeira do Brasil">
             <span>Brasil</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/us.png" alt="Bandeira dos Estados Unidos">
+            <img src="https://flagcdn.com/w640/us.png" alt="Bandeira dos Estados Unidos">
             <span>Estados Unidos</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/fr.png" alt="Bandeira da França">
+            <img src="https://flagcdn.com/w640/fr.png" alt="Bandeira da França">
             <span>França</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/de.png" alt="Bandeira da Alemanha">
+            <img src="https://flagcdn.com/w640/de.png" alt="Bandeira da Alemanha">
             <span>Alemanha</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/it.png" alt="Bandeira da Itália">
+            <img src="https://flagcdn.com/w640/it.png" alt="Bandeira da Itália">
             <span>Itália</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/es.png" alt="Bandeira da Espanha">
+            <img src="https://flagcdn.com/w640/es.png" alt="Bandeira da Espanha">
             <span>Espanha</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/gb.png" alt="Bandeira do Reino Unido">
+            <img src="https://flagcdn.com/w640/gb.png" alt="Bandeira do Reino Unido">
             <span>Reino Unido</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/jp.png" alt="Bandeira do Japão">
+            <img src="https://flagcdn.com/w640/jp.png" alt="Bandeira do Japão">
             <span>Japão</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/cn.png" alt="Bandeira da China">
+            <img src="https://flagcdn.com/w640/cn.png" alt="Bandeira da China">
             <span>China</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/in.png" alt="Bandeira da Índia">
+            <img src="https://flagcdn.com/w640/in.png" alt="Bandeira da Índia">
             <span>Índia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ru.png" alt="Bandeira da Rússia">
+            <img src="https://flagcdn.com/w640/ru.png" alt="Bandeira da Rússia">
             <span>Rússia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ca.png" alt="Bandeira do Canadá">
+            <img src="https://flagcdn.com/w640/ca.png" alt="Bandeira do Canadá">
             <span>Canadá</span>
         </div>
-        <!-- ... Continuação da Grade da Copa do Mundo (Restante dos Países) ... -->
+    </div>
+
+    <!-- PÁGINA 2 -->
+    <div class="page-grid">
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ar.png" alt="Bandeira da Argentina">
+            <img src="https://flagcdn.com/w640/ar.png" alt="Bandeira da Argentina">
             <span>Argentina</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/pt.png" alt="Bandeira de Portugal">
+            <img src="https://flagcdn.com/w640/pt.png" alt="Bandeira de Portugal">
             <span>Portugal</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/nl.png" alt="Bandeira dos Países Baixos">
+            <img src="https://flagcdn.com/w640/nl.png" alt="Bandeira dos Países Baixos">
             <span>Países Baixos</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/be.png" alt="Bandeira da Bélgica">
+            <img src="https://flagcdn.com/w640/be.png" alt="Bandeira da Bélgica">
             <span>Bélgica</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/uy.png" alt="Bandeira do Uruguai">
+            <img src="https://flagcdn.com/w640/uy.png" alt="Bandeira do Uruguai">
             <span>Uruguai</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/mx.png" alt="Bandeira do México">
+            <img src="https://flagcdn.com/w640/mx.png" alt="Bandeira do México">
             <span>México</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/co.png" alt="Bandeira da Colômbia">
+            <img src="https://flagcdn.com/w640/co.png" alt="Bandeira da Colômbia">
             <span>Colômbia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/hr.png" alt="Bandeira da Croácia">
+            <img src="https://flagcdn.com/w640/hr.png" alt="Bandeira da Croácia">
             <span>Croácia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ma.png" alt="Bandeira de Marrocos">
+            <img src="https://flagcdn.com/w640/ma.png" alt="Bandeira de Marrocos">
             <span>Marrocos</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/sn.png" alt="Bandeira do Senegal">
+            <img src="https://flagcdn.com/w640/sn.png" alt="Bandeira do Senegal">
             <span>Senegal</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/kr.png" alt="Bandeira da Coreia do Sul">
+            <img src="https://flagcdn.com/w640/kr.png" alt="Bandeira da Coreia do Sul">
             <span>Coreia do Sul</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/au.png" alt="Bandeira da Austrália">
+            <img src="https://flagcdn.com/w640/au.png" alt="Bandeira da Austrália">
             <span>Austrália</span>
         </div>
+    </div>
+
+    <!-- PÁGINA 3 -->
+    <div class="page-grid">
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ch.png" alt="Bandeira da Suíça">
+            <img src="https://flagcdn.com/w640/ch.png" alt="Bandeira da Suíça">
             <span>Suíça</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/dk.png" alt="Bandeira da Dinamarca">
+            <img src="https://flagcdn.com/w640/dk.png" alt="Bandeira da Dinamarca">
             <span>Dinamarca</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/cl.png" alt="Bandeira do Chile">
+            <img src="https://flagcdn.com/w640/cl.png" alt="Bandeira do Chile">
             <span>Chile</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ec.png" alt="Bandeira do Equador">
+            <img src="https://flagcdn.com/w640/ec.png" alt="Bandeira do Equador">
             <span>Equador</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/pe.png" alt="Bandeira do Peru">
+            <img src="https://flagcdn.com/w640/pe.png" alt="Bandeira do Peru">
             <span>Peru</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/py.png" alt="Bandeira do Paraguai">
+            <img src="https://flagcdn.com/w640/py.png" alt="Bandeira do Paraguai">
             <span>Paraguai</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ng.png" alt="Bandeira da Nigéria">
+            <img src="https://flagcdn.com/w640/ng.png" alt="Bandeira da Nigéria">
             <span>Nigéria</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/gh.png" alt="Bandeira de Gana">
+            <img src="https://flagcdn.com/w640/gh.png" alt="Bandeira de Gana">
             <span>Gana</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/cm.png" alt="Bandeira de Camarões">
+            <img src="https://flagcdn.com/w640/cm.png" alt="Bandeira de Camarões">
             <span>Camarões</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/eg.png" alt="Bandeira do Egito">
+            <img src="https://flagcdn.com/w640/eg.png" alt="Bandeira do Egito">
             <span>Egito</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/dz.png" alt="Bandeira da Argélia">
+            <img src="https://flagcdn.com/w640/dz.png" alt="Bandeira da Argélia">
             <span>Argélia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/tn.png" alt="Bandeira da Tunísia">
+            <img src="https://flagcdn.com/w640/tn.png" alt="Bandeira da Tunísia">
             <span>Tunísia</span>
         </div>
+    </div>
+
+    <!-- PÁGINA 4 -->
+    <div class="page-grid">
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/sa.png" alt="Bandeira da Arábia Saudita">
+            <img src="https://flagcdn.com/w640/sa.png" alt="Bandeira da Arábia Saudita">
             <span>Arábia Saudita</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ir.png" alt="Bandeira do Irã">
+            <img src="https://flagcdn.com/w640/ir.png" alt="Bandeira do Irã">
             <span>Irã</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/qa.png" alt="Bandeira do Catar">
+            <img src="https://flagcdn.com/w640/qa.png" alt="Bandeira do Catar">
             <span>Catar</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/uz.png" alt="Bandeira do Uzbequistão">
+            <img src="https://flagcdn.com/w640/uz.png" alt="Bandeira do Uzbequistão">
             <span>Uzbequistão</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/nz.png" alt="Bandeira da Nova Zelândia">
+            <img src="https://flagcdn.com/w640/nz.png" alt="Bandeira da Nova Zelândia">
             <span>Nova Zelândia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/cr.png" alt="Bandeira da Costa Rica">
+            <img src="https://flagcdn.com/w640/cr.png" alt="Bandeira da Costa Rica">
             <span>Costa Rica</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/pa.png" alt="Bandeira do Panamá">
+            <img src="https://flagcdn.com/w640/pa.png" alt="Bandeira do Panamá">
             <span>Panamá</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/jm.png" alt="Bandeira da Jamaica">
+            <img src="https://flagcdn.com/w640/jm.png" alt="Bandeira da Jamaica">
             <span>Jamaica</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/se.png" alt="Bandeira da Suécia">
+            <img src="https://flagcdn.com/w640/se.png" alt="Bandeira da Suécia">
             <span>Suécia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/no.png" alt="Bandeira da Noruega">
+            <img src="https://flagcdn.com/w640/no.png" alt="Bandeira da Noruega">
             <span>Noruega</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/pl.png" alt="Bandeira da Polônia">
+            <img src="https://flagcdn.com/w640/pl.png" alt="Bandeira da Polônia">
             <span>Polônia</span>
         </div>
         <div class="flag-cell">
-            <img src="https://flagcdn.com/w320/ua.png" alt="Bandeira da Ucrânia">
+            <img src="https://flagcdn.com/w640/ua.png" alt="Bandeira da Ucrânia">
             <span>Ucrânia</span>
         </div>
     </div>
